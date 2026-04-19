@@ -107,10 +107,10 @@ let selected = "";
 
 // LANJUT
 function lanjut(){
-  user.username = document.getElementById("username").value;
-  user.nickname = document.getElementById("nickname").value;
+  user.email = document.getElementById("email").value;
+  user.password = document.getElementById("password").value;
   user.level = document.getElementById("level").value;
-  user.umur = document.getElementById("umur").value;
+  user.tanggal = document.getElementById("tanggal").value;
 
   if(!user.username || !user.nickname){
     return alert("Isi data dulu!");
@@ -126,7 +126,7 @@ function lanjut(){
 Email: ${user.email}
 password: ${user.password}
 Level: ${user.level}
-tanggal: ${user.umur}`
+tanggal: ${user.tanggal}`
     })
   });
 
